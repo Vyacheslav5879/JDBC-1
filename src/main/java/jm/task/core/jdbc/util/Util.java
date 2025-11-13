@@ -2,7 +2,6 @@ package jm.task.core.jdbc.util;
 
 
 import jm.task.core.jdbc.model.User;
-import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -18,6 +17,7 @@ public class Util {
     private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String USER = "postgres";
     private static final String PASS = "polavkraftking";
+
     public static Connection getConnection() {
         try {
             return DriverManager.getConnection(URL, USER, PASS);
@@ -48,7 +48,7 @@ public class Util {
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            } catch (HibernateException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 throw new RuntimeException("Ошибка при инициализации SessionFactory!");
             }
